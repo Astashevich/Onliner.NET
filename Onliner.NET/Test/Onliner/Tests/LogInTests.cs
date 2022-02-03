@@ -24,8 +24,8 @@ namespace Onliner.NET.Test.Onliner.Tests
             GenericPages.LogInPage.InputPassword(password);
             GenericPages.LogInPage.ClickLogInFormButton();
 
-            Assert.True(GenericPages.LogInPage.IsLogInPageDisplayed(), "Log-In page is not displayed after test");
-            string actualLogInWarningText = GenericPages.LogInPage.GetInputFieldWarningText();
+            Assert.IsTrue(GenericPages.LogInPage.IsLogInPageDisplayed(), "Log-In page is not displayed after test");
+            var actualLogInWarningText = GenericPages.LogInPage.GetInputFieldWarningText();
             Assert.AreEqual(actualLogInWarningText, expectedMessage, "The actual log-in " +
                     $"warning text [{actualLogInWarningText}] don't much expected warning text [{expectedMessage}]");
         }

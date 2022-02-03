@@ -7,9 +7,6 @@ namespace Onliner.NET.Test.Onliner
 {
     public abstract class BaseTest
     {
-        
-
-
         [SetUp]
         public void OneTimeSetUp()
         {

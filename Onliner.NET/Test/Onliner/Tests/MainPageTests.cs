@@ -7,16 +7,17 @@ namespace Onliner.NET.Test.Onliner.Tests
     public class MainPageTests: BaseTest
     {
         private const string AboutLink = "/about";
+        private static readonly string AboutCompanyAssertion = "о сайте";
 
         [Test]
         public void OpenAboutPageFromFooterTest()
         {
             GenericPages.MainPage.GetFooter().ClickOnAboutCompanyLink();
-            string actualPageMessage = GenericPages.AboutCompanyPage.GetAboutCompanyPageMessage();
+            var actualPageMessage = GenericPages.AboutCompanyPage.GetAboutCompanyPageMessage();
 
-            Assert.True(GenericPages.AboutCompanyPage.IsPageOpened(AboutLink), "About company page isn't opened");
-            Assert.True(EqualsUtil.EqualContains("о сайте", actualPageMessage), 
-                string.Format("The page message [%s] don't contain [%s]", actualPageMessage, "о сайте"));
+            Assert.IsTrue(GenericPages.AboutCompanyPage.IsPageOpened(AboutLink), "About company page isn't opened");
+            Assert.IsTrue(EqualsUtil.EqualContains(AboutCompanyAssertion, actualPageMessage), 
+                $"The page message [{actualPageMessage}] don't contain [{AboutCompanyAssertion}]");
         }
     }
 }

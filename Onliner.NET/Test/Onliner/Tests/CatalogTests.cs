@@ -12,10 +12,9 @@ namespace Onliner.NET.Test.Onliner.Tests
         public void FindItemBySearcherTest()
         {
             GenericPages.MainPage.GetMenu().InputTextInSearchField(Iphone);
-            string itemName = GenericPages.MainPage.GetMenu().GetNameOfSearchedItem();
+            var itemName = GenericPages.MainPage.GetMenu().GetNameOfSearchedItem();
 
-            Assert.True(EqualsUtil.EqualContains(itemName, Iphone), string.Format("Searched item name [%s] wasn't contain [%s]",
-                    itemName, Iphone));
+            Assert.IsTrue(EqualsUtil.EqualContains(itemName, Iphone), $"Searched item name [{itemName}] wasn't contain [{Iphone}]");
         }
     }
 }

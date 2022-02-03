@@ -6,16 +6,19 @@ namespace Onliner.NET.Test.Onliner.Tests
 {
     public class ShoppingCartTests: BaseTest
     {
+        private const string ShoppingCartMessageAfterDelete = "Вы удалили";
+        private const string EmptyShoppingCartMessage = "Ваша корзина пуста";
+
         [Test]
         public void AddItemToShoppingCartTest()
         {
             GenericPages.MainPage.OpenCatalogRandomItem();
 
-            string itemNameFromCatalog = GenericPages.CatalogItemPage.GetItemName();
+            var itemNameFromCatalog = GenericPages.CatalogItemPage.GetItemName();
             GenericPages.CatalogItemPage.AddToCart();
             GenericPages.MainPage.GetMenu().OpenShoppingCartPage();
 
-            string itemNameFromCart = GenericPages.ShoppingCartPage.GetItemNameText();
+            var itemNameFromCart = GenericPages.ShoppingCartPage.GetItemNameText();
             Assert.AreEqual(itemNameFromCatalog, itemNameFromCart, string.Format("Item name [%s] don't match " +
                     "item name [%s] from shopping cart", itemNameFromCatalog, itemNameFromCart));
             Assert.True(GenericPages.ShoppingCartPage.IsCompleteOrderButtonVisible(), "[Перейти к оформлению] button isn't visible");
@@ -29,13 +32,13 @@ namespace Onliner.NET.Test.Onliner.Tests
             GenericPages.MainPage.GetMenu().OpenShoppingCartPage();
 
             GenericPages.ShoppingCartPage.RemoveItemFromCart();
-            string removedItemMessage = GenericPages.ShoppingCartPage.GetRemovedItemInformation();
-            string emptyCartMassage = GenericPages.ShoppingCartPage.GetEmptyCartMassage();
+            var removedItemMessage = GenericPages.ShoppingCartPage.GetRemovedItemInformation();
+            var emptyCartMassage = GenericPages.ShoppingCartPage.GetEmptyCartMassage();
 
-            Assert.True(EqualsUtil.EqualContains(removedItemMessage, "Вы удалили"), string.Format("The message [%s]" +
-                    " wasn't contains at expected removed message [%s]", removedItemMessage, "Вы удалили"));
-            Assert.True(EqualsUtil.EqualContains(emptyCartMassage, "Ваша корзина пуста"), string.Format("The message " +
-                    "[%s] wasn't contains at expected empty cart message [%s]", emptyCartMassage, "Ваша корзина пуста"));
+            Assert.True(EqualsUtil.EqualContains(removedItemMessage, ShoppingCartMessageAfterDelete), $"The message [{removedItemMessage}]" +
+                    $" wasn't contains at expected removed message [{ShoppingCartMessageAfterDelete}]");
+            Assert.True(EqualsUtil.EqualContains(emptyCartMassage, EmptyShoppingCartMessage), $"The message " +
+                    $"[{emptyCartMassage}] wasn't contains at expected empty cart message [{EmptyShoppingCartMessage}]");
         }
 
         [Test]
@@ -45,15 +48,14 @@ namespace Onliner.NET.Test.Onliner.Tests
             GenericPages.CatalogItemPage.AddToCart();
             GenericPages.MainPage.GetMenu().OpenShoppingCartPage();
 
-            double itemPrice = GenericPages.ShoppingCartPage.GetPrice();
+            var itemPrice = GenericPages.ShoppingCartPage.GetPrice();
             GenericPages.ShoppingCartPage.ClickQuantityInputPlusButton();
-            int numberFromQuantityInput = GenericPages.ShoppingCartPage.GetNumberFromQuantityInput();
-            double itemPriceAfterAddingItem = GenericPages.ShoppingCartPage.GetPrice();
+            var numberFromQuantityInput = GenericPages.ShoppingCartPage.GetNumberFromQuantityInput();
+            var itemPriceAfterAddingItem = GenericPages.ShoppingCartPage.GetPrice();
 
-            Assert.AreEqual(numberFromQuantityInput, 2, string.Format("The number [%d] from quantity input don't" +
-                    " match [2]", numberFromQuantityInput));
-            Assert.AreEqual(itemPriceAfterAddingItem, itemPrice * 2, string.Format("The price [%f] after " +
-                    "adding the same item was match first price [%f]", itemPriceAfterAddingItem, itemPrice));
+            Assert.AreEqual(numberFromQuantityInput, 2, $"The number [{numberFromQuantityInput}] from quantity input don't match [2]");
+            Assert.AreEqual(itemPriceAfterAddingItem, itemPrice * 2, $"The price [{itemPriceAfterAddingItem}] after " +
+                    $"adding the same item was match first price [{itemPrice}]");
         }
     }
 }

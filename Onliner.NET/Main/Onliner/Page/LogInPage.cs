@@ -49,13 +49,13 @@ namespace Onliner.NET.Main.Onliner.Page
             {
                 return false;
             }
-            catch (TimeoutException e)
+            catch (WebDriverTimeoutException)
             {
                 return false;
             }
         }
 
-        public String GetInputFieldWarningText()
+        public string GetInputFieldWarningText()
         {
             Waiter.WaitForDisplayed(InputFieldWarningTextBy);
             return driver.FindElement(InputFieldWarningTextBy).Text.ToLower().Trim();
