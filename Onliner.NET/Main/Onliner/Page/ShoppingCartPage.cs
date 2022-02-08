@@ -20,7 +20,6 @@ namespace Onliner.NET.Main.Onliner.Page
         private static readonly By quantityInputBy =By.XPath("//input[contains(@class, 'cart-form__input_nonadaptive')]");
         private static readonly By itemPriceTextBy =By.XPath("//div[contains(@class, 'helpers_hide_tablet')]/div[contains(@class, 'cart-form__description_condensed-another')]/span");
 
-
         protected override void WaitForPageOpened()
         {
             Waiter.ElementToBeClickable(openedShoppingCartMessageBy);

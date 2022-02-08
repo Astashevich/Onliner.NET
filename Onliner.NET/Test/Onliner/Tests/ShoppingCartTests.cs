@@ -9,7 +9,7 @@ namespace Onliner.NET.Test.Onliner.Tests
         private const string ShoppingCartMessageAfterDelete = "Вы удалили";
         private const string EmptyShoppingCartMessage = "Ваша корзина пуста";
 
-        [Test]
+        [Test(Description = "Test for adding item to the shopping cart")]
         public void AddItemToShoppingCartTest()
         {
             GenericPages.MainPage.OpenCatalogRandomItem();
@@ -21,10 +21,11 @@ namespace Onliner.NET.Test.Onliner.Tests
             var itemNameFromCart = GenericPages.ShoppingCartPage.GetItemNameText();
             Assert.AreEqual(itemNameFromCatalog, itemNameFromCart, string.Format("Item name [%s] don't match " +
                     "item name [%s] from shopping cart", itemNameFromCatalog, itemNameFromCart));
-            Assert.True(GenericPages.ShoppingCartPage.IsCompleteOrderButtonVisible(), "[Перейти к оформлению] button isn't visible");
+            Assert.IsTrue(GenericPages.ShoppingCartPage.IsCompleteOrderButtonVisible(), "[Перейти к оформлению] button isn't visible");
         }
 
-        [Test]
+        [Test(Description = "[Test - Case ID: ONL_002] Test for removing item from the shopping cart and checking the cart " +
+            "for emptiness")]
         public void RemoveItemFromShoppingCartTest()
         {
             GenericPages.MainPage.OpenCatalogRandomItem();
@@ -41,7 +42,7 @@ namespace Onliner.NET.Test.Onliner.Tests
                     $"[{emptyCartMassage}] wasn't contains at expected empty cart message [{EmptyShoppingCartMessage}]");
         }
 
-        [Test]
+        [Test(Description = "[Test-Case ID:ONL_003] Test for adding one more same item in the shopping cart by \"+\" button")]
         public void AddOneMoreSameItemInCartByTest()
         {
             GenericPages.MainPage.OpenCatalogRandomItem();

@@ -8,7 +8,7 @@ namespace Onliner.NET.Test.Onliner.Tests
     {
         private const string Iphone = "iphone 13";
 
-        [Test]
+        [Test(Description = "Test for finding item by searcher")]
         public void FindItemBySearcherTest()
         {
             GenericPages.MainPage.GetMenu().InputTextInSearchField(Iphone);

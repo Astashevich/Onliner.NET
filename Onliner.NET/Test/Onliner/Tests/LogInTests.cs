@@ -14,8 +14,14 @@ namespace Onliner.NET.Test.Onliner.Tests
         private const string LoginWithFewGaps = "  vs2450439@gmail.com   ";
         private const string Space = " ";
         private static readonly string _randomEmail = RandomSymbolUtil.GetRandomLogin();
+        private const string _incorectEmail = "HuymneVSraku_YaEbalMakaku@pukSLona.lox";
 
-        [TestCaseSource(nameof(TestData))]
+        //[TestCaseSource(nameof(TestData))]
+        [TestCase("", "", IncorectLogInWarningText, Description = "Test of log - In when fields are empty")]
+        [TestCase(Login, "", IncorectPasswordWarningText, Description = "Test of log - In when password field is empty")]
+        [TestCase(LoginWithFewGaps, Password, IncorectLogInWarningText, Description = "Test of log - In when before and after wright login puted few gaps")]
+        [TestCase(_incorectEmail, "", IncorectPasswordWarningText, Description = "Test of log - In when login is non-existent")]
+        [TestCase(Space, Space, IncorectLogInWarningText, Description = "Test of log - In when fields fills by \"space\"")]
         public void LogInWithIncorrectDataTest(string login, string password, string expectedMessage)
         {
             GenericPages.MainPage.GetMenu().OpenLogInPage();

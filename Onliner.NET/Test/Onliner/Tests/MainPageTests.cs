@@ -9,7 +9,7 @@ namespace Onliner.NET.Test.Onliner.Tests
         private const string AboutLink = "/about";
         private static readonly string AboutCompanyAssertion = "о сайте";
 
-        [Test]
+        [Test(Description = "Test for opening the 'About' page")]
         public void OpenAboutPageFromFooterTest()
         {
             GenericPages.MainPage.GetFooter().ClickOnAboutCompanyLink();
